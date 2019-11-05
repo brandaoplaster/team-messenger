@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factoy :message do
-    body { FFacker::Lorem.sentence }
+    body { FFaker::Lorem.sentence }
     user
   end
 end

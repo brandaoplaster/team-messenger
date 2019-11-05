@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factoy :team do
-    slug { FFacker::Lorem.word }
+    slug { FFaker::Lorem.word }
     user
   end
 end
