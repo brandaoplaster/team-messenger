@@ -58,6 +58,61 @@ RSpec.describe ChannelsController, type: :controller do
   end
 
   describe "GET #show" do
+    render_views
+
+    context "User is team member" do
+
+      before(:each) do
+        team = create(:team, user: @current_user)
+        @channel = create(:channel, team: team)
+
+        @message_one = build(:message)
+        @message_two = build(:message)
+
+        @channel.messages << [@message_one, @message_two]
+
+        get :show, params: { id: @channel.id }
+      end
+
+      it "Returns http success" do
+        expect(response).to have_http_status(:seccess)
+      end
+
+      it "Returns right channel values" do
+        response_hash = JSON.parse(response.body)
+
+        expect(response_hash["slug"]).to eql(@channel.slug)
+        expect(response_hash["user_id"]).to eql(@channel.user.id)
+        expect(response_hash["team_id"]).to eql(@channel.team.id)
+      end
+
+      it "Returns the right number of messages" do
+        response_hash = JSON.parse(response.body)
+        expect(response_hash["messages"].count).to eql(2)
+      end
+
+      it "Returns the right messages" do
+        response_hash = JSON.parse(response.body)
+
+        expect(response_hash["messages"][0]["body"]).to eql(@message_one.body)
+        expect(response_hash["messages"][0]["user_id"]).to eql(@message_one.user.id)
+        expect(response_hash["messages"][1]["body"]).to eql(@message_two.body)
+        expect(response_hash["messages"][1]["user_id"]).to eql(@message_two.user.id)
+      end
+
+    end
+
+    context "User is not team member" do
+
+      it "Returns http forbidden" do
+        channel = create(:channel)
+
+        get :show, params: { id: channel.id }
+
+        expect(response).to have_http_status(:forbidden)
+      end
+
+    end
 
   end
 
