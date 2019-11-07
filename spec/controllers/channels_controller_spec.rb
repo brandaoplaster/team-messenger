@@ -42,6 +42,19 @@ RSpec.describe ChannelsController, type: :controller do
         expect(response_hash["team_id"]).to eql(@team.id)
       end
     end
+
+    context "User isn't team member" do
+      before(:each) do
+        @team = create(:team)
+        @channel_attributes = attributes_for(:channel, team: @team)
+        post :create, params: { channel: @channel_attributes.merge(team_id: @team.id) }
+      end
+
+      it "Returns http forbidden" do
+        expect(response).to have_http_status(:forbidden)
+      end
+
+    end
   end
 
   describe "GET #show" do
