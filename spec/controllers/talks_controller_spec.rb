@@ -55,7 +55,18 @@ RSpec.describe TalksController, type: :controller do
     end
 
     context "Isn't talk member" do
+      before(:each) do
+        @team = create(:team)
+        @guest_user = create(:user)
+        @team.users << @guest_user
+        @talk = create(:talk, user_two: @guest_user, team: @team)
 
+        get :show, params: {id: @guest_user, team_id: @team.id}
+      end
+
+      it "returns http forbidden" do
+        expect(response).to have_http_status(:forbidden)
+      end
     end
 
   end
