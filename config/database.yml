@@ -7,12 +7,12 @@ default: &default
 
 development:
   <<: *default
-  database: onebitchat_development
+  database: one_messenger_development
 
 test:
   <<: *default
-  database: onebitchat_exchance_test
+  database: one_messenger_test
 
 production:
   <<: *default
-  database: onebitchat_exchance_production
+  database: one_messenger_production
