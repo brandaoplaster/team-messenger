@@ -1,8 +1,13 @@
 class TeamsController < ApplicationController
+  before_action :set_team, only: [:destroy]
+  before_action :set_by_slug_team, only: [:show]
+
   def index
+    @team = current_user.teams
   end
 
   def show
+    authorize! :read, @team
   end
 
   def create
