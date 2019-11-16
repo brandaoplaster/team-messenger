@@ -15,9 +15,16 @@ class ChannelsController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @channel
+    @channel.destroy
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
   end
 
   def show
+    authorize! :read, @channel
   end
 
   private
