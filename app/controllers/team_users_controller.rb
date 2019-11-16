@@ -15,6 +15,12 @@ class TeamUsersController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @team_user
+    @team_user.destroy
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
   end
 
   private
