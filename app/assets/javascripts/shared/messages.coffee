@@ -39,3 +39,16 @@ window.open = (id, type) ->
       Materialize.toast('Problem to get ' + type + ' informations &nbsp;<b>:(</b>', 4000, 'red')
 
   return false
+
+window.add = (slug, id, type) ->
+  additional = if type == "channel" then "#" else ""
+  $('.' + type + 's').prepend('<li class="' + type + '_' + id + '">' +
+    '<div>' +
+    '<a href="#" class="open_' + type + '">' +
+    '<span id="' + id + '">' + additional + slug + '</span>' +
+    '</a>' +
+    '<a class="right remove_' + type + '" href="#" id="' + id + '">' +
+    '<i class="material-icons" id="' + id + '">settings</i>' +
+    '</a>' +
+    '</div>' +
+    '</li>')
