@@ -3,7 +3,9 @@ class ChatChannel < ApplicationCable::Channel
   protected :ability
 
   def subscribed
-    # stream_from "some_channel"
+    if authorize_set_chat
+      stream_from "#{params[:team_id]}_#{params[:type]}_#{@chat}"
+    end
   end
 
   def unsubscribed
