@@ -6,6 +6,10 @@ module ApplicationCable
       self.current_user = find_verified_user
     end
 
+    def ability
+      @ability ||= Ability.new(current_user)
+    end
+
     protected
 
     def find_verified_user
