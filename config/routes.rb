@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   get '/:slug', to: 'teams#show'
   resources :channels, only: [:show, :create, :destroy]
   resources :talks, only: [:show]
-  resources :teams_users, only: [:create, :destroy]
-  devise_for :users, controllers => { registrations: 'registrations' }
+  resources :team_users, only: [:create, :destroy]
+  devise_for :users, :controllers => { registrations: 'registrations' }
 end

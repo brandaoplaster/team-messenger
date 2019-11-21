@@ -6,12 +6,12 @@
 
     <div class="field">
       <%= f.label :name %><br />
-      <%= f.email_field :name, autofocus: true, %>
+      <%= f.text_field :name, autofocus: true %>
     </div>
 
     <div class="field">
       <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, %>
+      <%= f.email_field :email, autofocus: true %>
     </div>
 
     <div class="field">
@@ -29,8 +29,8 @@
 
     <div class="actions">
       <button class="btn waves-effect waves-light" type="submit" name="action">
+        Sign Up
         <i class="material-icons right">send</i>
-        Sing up
       </button>
     </div>
   <% end %>
