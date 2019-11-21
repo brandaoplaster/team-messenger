@@ -8,8 +8,9 @@ class ChatChannel < ApplicationCable::Channel
     end
   end
 
-  def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+  def receive
+    @message = Message.new(body: data["message"], user: current_user)
+    @record.messages << @message
   end
 
   private
