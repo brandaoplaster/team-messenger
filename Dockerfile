@@ -3,7 +3,7 @@ FROM ruby:2.3-slim
 RUN apt-get update && apt-get install -qq -y --no-install-recommends \
       build-essential nodejs libpq-dev
 # Set our patch
-ENV INSTALL_PATH /one-messenger
+ENV INSTALL_PATH /team-messenger
 # Create directory
 RUN mkdir -p $INSTALL_PATH
 # Set our path as the main directory
